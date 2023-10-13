@@ -1,10 +1,9 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import {FirebaseInitializerProvider} from "./database/firebaseInitializer.provider";
+import { ApplicationModule } from './ApplicationModule';
 require('dotenv').config()
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(ApplicationModule);
   const port = process.env.PORT || 3000
   await app.listen(port);
   console.log(`Application running on port ${port}`)
