@@ -16,3 +16,7 @@ export const userConfig = {
     userName : process.env.FIREBASE_USER_NAME,
     userPassword : process.env.FIREBASE_USER_PASSWORD,
 }
+
+export let dbKeys = {
+    access_token: "",
+}

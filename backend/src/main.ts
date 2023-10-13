@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import {FirebaseInitializerProvider} from "./database/firebaseInitializer.provider";
 require('dotenv').config()
 
 async function bootstrap() {
@@ -8,4 +9,5 @@ async function bootstrap() {
   await app.listen(port);
   console.log(`Application running on port ${port}`)
 }
+
 bootstrap();

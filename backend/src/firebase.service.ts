@@ -1,21 +1,25 @@
 import {Injectable} from "@nestjs/common";
-import {FirebaseClient} from "./database/FirebaseClient";
-import {child, get, ref} from "@firebase/database";
-import {FirebaseConnection} from "./database/FirebaseConnection";
+import {FirebaseClientProvider} from "./database/firebaseClient.provider";
+import {child, DataSnapshot, get, ref} from "@firebase/database";
+import {FirebaseConnectionProvider} from "./database/firebaseConnection.provider";
+import {getAuth} from "@firebase/auth";
 
 @Injectable()
 export class FirebaseService {
-    private database = FirebaseClient
-    getUsers(){
-        this.database.getInstance().then((database) => {
-            let dbRef = ref(database)
-            get(child(dbRef, 'usuarios/'))
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                        console.log(snapshot.val())
-                    }
-                })
-                .catch((error) => console.log(error))
-        })
+    constructor() {
+        FirebaseClientProvider.initialize()
+            .then(() => console.log("Database initialized successfully"))
+            .catch(() => console.log("Database wasn't initialized successfully"))
+    }
+    getUsers() {
+        const database = FirebaseClientProvider.getDb()
+        const dbRef = ref(database, "usuarios")
+        get(child(dbRef, "/"))
+            .then((snapshot) => {
+                if(snapshot.exists()) {
+                    console.log(snapshot.val())
+                }
+            })
+            .catch((error) => console.log(error))
     }
 }

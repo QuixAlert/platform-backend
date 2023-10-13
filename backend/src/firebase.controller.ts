@@ -1,5 +1,6 @@
-import {Controller, Get} from "@nestjs/common";
+import {Controller, Get, Param, Req} from "@nestjs/common";
 import {FirebaseService} from "./firebase.service";
+import {Helpers} from "./utils/Helpers";
 
 @Controller("firebase")
 export class FirebaseController {
