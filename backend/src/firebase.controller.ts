@@ -1,5 +1,4 @@
 import {Controller, Get} from "@nestjs/common";
-import {AppService} from "./app.service";
 import {FirebaseService} from "./firebase.service";
 
 @Controller("firebase")
