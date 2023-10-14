@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import {FirebaseServiceProvider} from "../../firebase/FirebaseServiceProvider";
-import {child, get, ref} from "@firebase/database";
+import {child, DataSnapshot, get, ref} from "@firebase/database";
+import {mapUserData} from "../functions";
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -12,15 +13,20 @@ export class UserRepository implements IUserRepository {
         this.dbRef = ref(this.database)
     }
 
-
-    getAll(): void {
-        get(child(this.dbRef, "usuarios"))
+    getAll(): Promise<User[]> {
+        return get(child(this.dbRef, "usuarios"))
             .then((snapshot) => {
-                if(snapshot.exists()){
-                    console.log(snapshot.val())
+                if (snapshot.exists()) {
+                    const values = snapshot.val();
+                    const users: User[] = Object.values(values).map((userData: any) => mapUserData(userData));
+                    return users;
+                } else {
+                    return [];
                 }
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                throw err;
+            });
     }
 
     getById(): void {
