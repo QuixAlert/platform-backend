@@ -7,8 +7,8 @@ export class UserRepository implements IUserRepository {
     private database;
     private dbRef;
 
-    constructor(private firebaseService: FirebaseServiceProvider) {
-        this.database = firebaseService.getDbInstance();
+    constructor() {
+        this.database = FirebaseServiceProvider.getDbInstance()
         this.dbRef = ref(this.database)
     }
 
