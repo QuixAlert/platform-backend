@@ -1,4 +1,4 @@
-interface User {
+interface AppUser {
     id: string,
     name: string,
     email: string,

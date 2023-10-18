@@ -1,4 +1,4 @@
-export function mapUserData(userData: any): User {
+export function mapUserData(userData: any): AppUser {
     return {
         email: userData.email,
         id: userData.id,

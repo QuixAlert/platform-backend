@@ -1,7 +1,7 @@
 import { Database, getDatabase } from "@firebase/database";
 import { FirebaseApp, initializeApp } from "@firebase/app";
 import { Auth, getAuth, signInWithEmailAndPassword, UserCredential } from "@firebase/auth";
-import { dbConfig, userConfig } from "../utils/FirebaseConfiguration";
+import { dbConfig, userConfig } from "./FirebaseConfiguration";
 
 export class FirebaseConnectionProvider {
     private static fireBaseApp: FirebaseApp = null;

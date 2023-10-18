@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ApplicationModule } from './ApplicationModule';
-import {FirebaseConnectionProvider} from "./firebase/FirebaseConnectionProvider";
+import {FirebaseConnectionProvider} from "./infra/firebase/FirebaseConnectionProvider";
 require('dotenv').config()
 
 async function bootstrap() {
