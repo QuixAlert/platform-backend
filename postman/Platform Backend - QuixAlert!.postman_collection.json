@@ -57,7 +57,16 @@
 					"name": "All",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/adoptions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"adoptions"
+							]
+						}
 					},
 					"response": []
 				},
@@ -77,13 +86,32 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/firebase/users",
+							"raw": "{{baseUrl}}/adoptions/-Ni0v7yJmCSjWZ7p3Va2",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"firebase",
-								"users"
+								"adoptions",
+								"-Ni0v7yJmCSjWZ7p3Va2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/adoptions/user/lnnvN64SjlOdsecRs008fa1AtYr2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"adoptions",
+								"user",
+								"lnnvN64SjlOdsecRs008fa1AtYr2"
 							]
 						}
 					},
