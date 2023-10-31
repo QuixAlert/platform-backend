@@ -131,6 +131,65 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Animals",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/animals",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By animal id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/animals/-NhnEfd8tOUg34A8OlrR",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"animals",
+								"-NhnEfd8tOUg34A8OlrR"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/animals/user/lnnvN64SjlOdsecRs008fa1AtYr2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"animals",
+								"user",
+								"lnnvN64SjlOdsecRs008fa1AtYr2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
