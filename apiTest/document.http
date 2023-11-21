@@ -1,0 +1,17 @@
+# Platform Backend - QuixAlert!
+
+###
+# group: Reports
+# @name All
+GET {{base_url}}/document
+
+###
+# group: Documents
+# @name By documnet id
+GET {{base_url}}/document/-Ng_YU_xOzNbQT56nORw
+
+###
+# group: Documents
+# @name By user id
+GET {{base_url}}/document/user/lnnvN64SjlOdsecRs008fa1AtYr2
+

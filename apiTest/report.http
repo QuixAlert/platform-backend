@@ -1,12 +1,17 @@
 # Platform Backend - QuixAlert!
 
 ###
-# group: Report
+# group: Reports
 # @name All
 GET {{base_url}}/report
 
 ###
-# group: Report
-# @name By id
-GET {{base_url}}/firebase/users
-Authorization: Bearer 123
+# group: Reports
+# @name By report id
+GET {{base_url}}/report/-NgaamcbkEIyh9VJfhwd
+
+###
+# group: Animals
+# @name By user id
+GET {{base_url}}/report/user/wAw9lsuk0Catoq67ylykmOM8pqx2
+
