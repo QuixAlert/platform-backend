@@ -1,8 +1,10 @@
-import {Controller, Get, Injectable, Param} from "@nestjs/common";
+import {Controller, Get, Injectable, Param, UseGuards} from "@nestjs/common";
 import {AnimalRepositoryImpl} from "../../animal/repository/AnimalRepositoryImpl";
 import {ReportRepositoryImpl} from "../repository/ReportRepositoryImpl";
+import {PassportTokenGuard} from "../../auth/guard/PassportTokenGuard";
 
 @Controller("report")
+@UseGuards(PassportTokenGuard)
 @Injectable()
 export class ReportController {
     constructor(private reportRepository: ReportRepositoryImpl) {}

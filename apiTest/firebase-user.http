@@ -4,8 +4,10 @@
 # group: Firebase User
 # @name All
 GET {{base_url}}/users-firebase/
+Authorization: Bearer {{auth_token}}
 
 ###
 # group: Firebase User
 # @name By id
 GET {{base_url}}/users-firebase/lnnvN64SjlOdsecRs008fa1AtYr2
+Authorization: Bearer {{auth_token}}

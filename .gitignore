@@ -1,4 +1,5 @@
 # dependencies
+/apiTest/http-client.env.json
 node_modules/
 */node_modules/
 

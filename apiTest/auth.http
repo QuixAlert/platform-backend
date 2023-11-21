@@ -1,0 +1,36 @@
+# Platform Backend - QuixAlert!
+
+###
+# group: User
+# @name Register user
+POST {{base_url}}/auth/register
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "username": "joaonatas",
+  "email": "natinhas@gmail.com",
+  "password": "1234567",
+  "passwordConfirmation": "1234567"
+}
+
+###
+# group: User
+# @name Login user
+POST {{base_url}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "natinhas@gmail.com",
+  "password": 1234567
+}
+
+###
+# group: User
+# @name Refresh token
+POST {{base_url}}/auth/refresh-token
+Content-Type: application/json
+
+{
+  "refreshToken": ""
+}

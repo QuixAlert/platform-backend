@@ -4,3 +4,4 @@ export const ADOPTION_PATH = "adocoes"
 
 export const REPORT_PATH = "postagens"
 export const DOCS_PATH = "documentos"
+export const AUTH_PATH = "autenticacao"

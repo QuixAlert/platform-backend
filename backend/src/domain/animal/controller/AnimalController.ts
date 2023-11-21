@@ -1,7 +1,9 @@
-import {Controller, Get, Injectable, Param} from "@nestjs/common";
+import {Controller, Get, Injectable, Param, UseGuards} from "@nestjs/common";
 import {AnimalRepositoryImpl} from "../repository/AnimalRepositoryImpl";
+import {PassportTokenGuard} from "../../auth/guard/PassportTokenGuard";
 
 @Controller("animals")
+@UseGuards(PassportTokenGuard)
 @Injectable()
 export class AnimalController {
     constructor(private animalRepository: AnimalRepositoryImpl) {}

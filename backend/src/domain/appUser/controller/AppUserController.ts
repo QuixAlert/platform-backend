@@ -1,7 +1,9 @@
-import {Controller, Get, Injectable, Param} from "@nestjs/common";
+import {Controller, Get, Injectable, Param, UseGuards} from "@nestjs/common";
 import {AppUserRepository} from "../repository/app-user-repository.service";
+import {PassportTokenGuard} from "../../auth/guard/PassportTokenGuard";
 
 @Controller("users-firebase")
+@UseGuards(PassportTokenGuard)
 @Injectable()
 export class AppUserController {
     constructor(private userRepository: AppUserRepository) {}

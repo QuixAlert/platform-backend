@@ -14,19 +14,25 @@ import {ReportRepositoryImpl} from "./domain/report/repository/ReportRepositoryI
 import {DocumentModule} from "./domain/documents/DocumentModule";
 import {DocumentController} from "./domain/documents/controller/DocumentController";
 import {DocumentRepositoryImpl} from "./domain/documents/repository/DocumentRepositoryImpl";
+import {AuthModule} from "./domain/auth/AuthModule";
+import {AuthController} from "./domain/auth/controller/AuthController";
+import {AuthRepositoryImpl} from "./domain/auth/repository/AuthRepositoryImpl";
+import {JwtService} from "@nestjs/jwt";
+import {ConfigModule, ConfigService} from "@nestjs/config";
 
 @Module({
   imports: [
       AppUserModule, AnimalModule, AdoptionModule,
-      ReportModule, DocumentModule
+      ReportModule, DocumentModule, AuthModule, ConfigModule.forRoot({ isGlobal: true })
   ],
   controllers: [
       AppUserController, AnimalController, AdoptionController,
-      ReportController, DocumentController
+      ReportController, DocumentController, AuthController
   ],
   providers: [
       AppUserRepository, AnimalRepositoryImpl, AdoptionRepositoryImpl,
-      ReportRepositoryImpl, DocumentRepositoryImpl 
+      ReportRepositoryImpl, DocumentRepositoryImpl, AuthRepositoryImpl,
+      JwtService, ConfigService
   ],
 })
 export class ApplicationModule {}
