@@ -1,0 +1,12 @@
+# Platform Backend - QuixAlert!
+
+###
+# group: Report
+# @name All
+GET {{base_url}}/report
+
+###
+# group: Report
+# @name By id
+GET {{base_url}}/firebase/users
+Authorization: Bearer 123

@@ -1,0 +1,16 @@
+# Platform Backend - QuixAlert!
+
+###
+# group: Animals
+# @name All
+GET {{base_url}}/animals
+
+###
+# group: Animals
+# @name By animal id
+GET {{base_url}}/animals/-NhwBt-CDbzkl19zh1sQ
+
+###
+# group: Animals
+# @name By user id
+GET {{base_url}}/animals/user/lnnvN64SjlOdsecRs008fa1AtYr2

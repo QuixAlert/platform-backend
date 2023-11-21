@@ -19,7 +19,10 @@ export class AnimalRepositoryImpl implements IAnimalRepository {
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     const values = snapshot.val();
-                    return Object.values(values).map((animalData: any) => mapAnimalData(animalData));
+                    return Object.values(values)
+                        .map(
+                            (animalData: any) => Object.values(animalData).map((animalDataIn: any) => mapAnimalData(animalDataIn))
+                        ).flat();
                 }
             })
             .catch((err) => {
@@ -32,12 +35,15 @@ export class AnimalRepositoryImpl implements IAnimalRepository {
             const snapshot = await get(child(this.dbRef, ANIMAL_PATH));
 
             if (snapshot.exists()) {
-                const animals = snapshot.val();
-                const animal = Object.entries(animals).find(([key, value]) => key === animalId);
+                const animalsSnap = snapshot.val();
 
-                if (animal) {
-                    return mapAnimalData(animal[1]);
-                }
+                const animal = Object.values(animalsSnap)
+                    .map((animalDataIn: any) => Object.values(animalDataIn).map(mapAnimalData))
+                    .flat()
+                    .find(animal => animal.id == animalId)
+
+                return animal
+
             }
         } catch (err) {
             throw err;
@@ -46,17 +52,15 @@ export class AnimalRepositoryImpl implements IAnimalRepository {
     }
 
 
-    async getByUserId(userId: String): Promise<Animal> {
+    async getByUserId(userId: String): Promise<Animal[]> {
         try {
             const snapshot = await get(child(this.dbRef, ANIMAL_PATH));
 
             if (snapshot.exists()) {
-                const animals = snapshot.val();
-                const animal = Object.entries(animals).find(([key, value]) => value["idUsuario"] == userId);
+                const animalsSnap = snapshot.val();
+                const animals = Object.values(animalsSnap[userId.valueOf()]).map(mapAnimalData)
 
-                if (animal) {
-                    return mapAnimalData(animal[1]);
-                }
+                return animals
             }
         } catch (err) {
             throw err;

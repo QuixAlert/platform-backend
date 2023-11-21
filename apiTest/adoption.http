@@ -1,0 +1,16 @@
+# Platform Backend - QuixAlert!
+
+###
+# group: Adoption
+# @name All
+GET {{base_url}}/adoptions
+
+###
+# group: Adoption
+# @name By id
+GET {{base_url}}/adoptions/-Ni0v7yJmCSjWZ7p3Va2
+
+###
+# group: Adoption
+# @name By user id
+GET {{base_url}}/adoptions/user/lnnvN64SjlOdsecRs008fa1AtYr2
