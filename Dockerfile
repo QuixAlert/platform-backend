@@ -1,13 +1,13 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14-alpine3.17
+FROM node:20.8.0-alpine
 
-# Set the working directory to /app
-WORKDIR /backend
+WORKDIR /app
 
-COPY ./backend /backend
+COPY ./backend .
 
-RUN npm install
+RUN npm install --quiet --no-optional --no-found --loglevel=error
+
+RUN npm run build
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:prod"]
