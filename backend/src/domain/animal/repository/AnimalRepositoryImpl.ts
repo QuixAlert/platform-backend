@@ -1,5 +1,5 @@
 import {Injectable} from "@nestjs/common";
-import {child, Database, DatabaseReference, get, ref} from "@firebase/database";
+import {child, Database, DatabaseReference, get, ref, set} from "@firebase/database";
 import {FirebaseConnectionProvider} from "../../../infra/firebase/FirebaseConnectionProvider";
 import {ANIMAL_PATH} from "../../utils/Consts";
 import {mapAnimalData} from "../model/AnimalMapper";
@@ -12,6 +12,18 @@ export class AnimalRepositoryImpl implements IAnimalRepository {
     constructor() {
         this.database = FirebaseConnectionProvider.getDb()
         this.dbRef = ref(this.database)
+    }
+
+    async registerAnimal(animal: Animal): Promise<boolean> {
+        const documentId = this.generateUniqueDocumentId();
+
+        animal["id"] = documentId
+
+        const result = await set(ref(this.database,  ANIMAL_PATH + '/' + documentId), animal)
+        .then(() => true)
+        .catch(() => false)
+
+        return result
     }
 
     async getAll(): Promise<Animal[]> {
@@ -68,4 +80,7 @@ export class AnimalRepositoryImpl implements IAnimalRepository {
         return null;
     }
 
+    private generateUniqueDocumentId(): string {
+      return new Date().getTime().toString();
+    }
 }

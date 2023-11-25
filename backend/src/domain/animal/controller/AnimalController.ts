@@ -1,4 +1,5 @@
-import {Controller, Get, Injectable, Param, UseGuards} from "@nestjs/common";
+import {Controller, Get, Injectable, Param, UseGuards, HttpException, HttpStatus, Post} from "@nestjs/common";
+import {Body} from "@nestjs/common"
 import {AnimalRepositoryImpl} from "../repository/AnimalRepositoryImpl";
 import {PassportTokenGuard} from "../../auth/guard/PassportTokenGuard";
 
@@ -21,5 +22,14 @@ export class AnimalController {
     @Get('/user/:id')
     async getAnimalByUserId(@Param('id') id: string){
         return this.animalRepository.getByUserId(id)
+    }
+
+    @Post('/register')
+    async registerAnimal(@Body() animal: Animal){
+        if(await this.animalRepository.registerAnimal(animal)){
+            return true
+        } else {
+            throw new HttpException(`The password could not be registered!`, HttpStatus.FORBIDDEN)
+        }
     }
 }

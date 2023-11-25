@@ -1,0 +1,43 @@
+import {IAdoptionFeedbackRepository} from "./IAdoptionFeedbackRepository";
+import {Feedback} from "../../shared/model/Feedback";
+import {child, Database, DatabaseReference, get, ref, set} from "@firebase/database";
+import {FirebaseConnectionProvider} from "../../../infra/firebase/FirebaseConnectionProvider";
+import {ADOPTION_FEEDBACK_PATH, ADOPTION_PATH, ANIMAL_PATH} from "../../utils/Consts";
+import {mapAdoptionData} from "../../adoption/model/AdoptionMapper";
+import {generateUniqueDocumentId} from "../../utils/Helpers";
+
+export class AdoptionFeedbackRepositoryImpl implements IAdoptionFeedbackRepository {
+    private readonly database: Database;
+    private readonly dbRef: DatabaseReference;
+
+    constructor() {
+        this.database = FirebaseConnectionProvider.getDb()
+        this.dbRef = ref(this.database)
+    }
+
+
+    async getAll(): Promise<Feedback[]> {
+        return get(child(this.dbRef, ADOPTION_FEEDBACK_PATH))
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const values = snapshot.val();
+                    return Object.values(values) as Feedback[]
+                }
+            })
+            .catch((err) => {
+                throw err;
+            });
+    }
+
+    async registerAdoptionFeedback(feedBack: Feedback): Promise<boolean> {
+        const documentId = generateUniqueDocumentId();
+
+        feedBack["id"] = documentId
+
+        const result = await set(ref(this.database,  ADOPTION_FEEDBACK_PATH + '/' + documentId), feedBack)
+            .then(() => true)
+            .catch(() => false)
+
+        return result
+    }
+}

@@ -19,19 +19,33 @@ import {AuthController} from "./domain/auth/controller/AuthController";
 import {AuthRepositoryImpl} from "./domain/auth/repository/AuthRepositoryImpl";
 import {JwtService} from "@nestjs/jwt";
 import {ConfigModule, ConfigService} from "@nestjs/config";
+import {AdoptionFeedbackModule} from "./domain/adoptionFeedback/AdoptionFeedbackModule";
+import {AdoptionFeedbackController} from "./domain/adoptionFeedback/controller/adoption-feedback-controller.service";
+import {AdoptionFeedbackRepositoryImpl} from "./domain/adoptionFeedback/repository/AdoptionFeedbackRepositoryImpl";
+import { ReportFeedbackModule } from './domain/reportFeedback/ReportFeedbackModule';
+import { DocumentFeedbackModule } from './domain/documentFeedback/DocumentFeedbackModule';
+import { ReportFeedbackController } from './domain/reportFeedback/controller/ReportFeedbackController';
+import { DocumentFeedbackController } from './domain/documentFeedback/controller/DocumentFeedbackController';
+import { ReportFeedbackRepositoryImpl } from './domain/reportFeedback/repository/ReportFeedbackRepositoryImpl';
+import { DocumentFeedbackRepositoryImpl } from './domain/documentFeedback/repository/DocumentFeedbackRepositoryImpl';
 
 @Module({
   imports: [
       AppUserModule, AnimalModule, AdoptionModule,
-      ReportModule, DocumentModule, AuthModule, ConfigModule.forRoot({ isGlobal: true })
+      ReportModule, DocumentModule, AuthModule, AdoptionFeedbackModule,
+      ReportFeedbackModule, DocumentFeedbackModule,
+      ConfigModule.forRoot({ isGlobal: true }),
+
   ],
   controllers: [
       AppUserController, AnimalController, AdoptionController,
-      ReportController, DocumentController, AuthController
+      ReportController, DocumentController, AuthController, AdoptionFeedbackController,
+      ReportFeedbackController, DocumentFeedbackController
   ],
   providers: [
       AppUserRepository, AnimalRepositoryImpl, AdoptionRepositoryImpl,
       ReportRepositoryImpl, DocumentRepositoryImpl, AuthRepositoryImpl,
+      AdoptionFeedbackRepositoryImpl, ReportFeedbackRepositoryImpl, DocumentFeedbackRepositoryImpl,
       JwtService, ConfigService
   ],
 })

@@ -8,9 +8,6 @@ import {User, UserRole} from "../model/User";
 import {PassportTokenGuard} from "../guard/PassportTokenGuard";
 import {AuthGuard} from "../guard/AuthGuard";
 import {Role} from "../decorators/Role";
-import {stringify} from "ts-jest";
-import {use} from "passport";
-
 require('dotenv').config()
 
 @Controller("auth")
