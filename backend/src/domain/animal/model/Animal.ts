@@ -1,5 +1,6 @@
 interface Animal {
     id: string,
+    name: string,
     userId: string,
     race: string,
     type: string,
