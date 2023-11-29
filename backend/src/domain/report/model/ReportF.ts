@@ -8,4 +8,5 @@ interface ReportF {
     incidentTime: String,
     incidentData: String,
     incidentLocation: String
+    attended: boolean
 }
