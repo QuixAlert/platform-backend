@@ -1,4 +1,4 @@
-import {Controller, Get, Injectable, Param, UseGuards} from "@nestjs/common";
+import {Controller, Get, Injectable, Param, Put, UseGuards} from "@nestjs/common";
 import {AnimalRepositoryImpl} from "../../animal/repository/AnimalRepositoryImpl";
 import {ReportRepositoryImpl} from "../repository/ReportRepositoryImpl";
 import {PassportTokenGuard} from "../../auth/guard/PassportTokenGuard";
@@ -22,5 +22,10 @@ export class ReportController {
     @Get('/user/:id')
     async getReportByUserId(@Param('id') id: string){
         return this.reportRepository.getByUserId(id)
+    }
+
+    @Put('change-status/:id')
+    async changeReportStatus(@Param('id') id: string){
+        return this.reportRepository.changeStatusReport(id)
     }
 }

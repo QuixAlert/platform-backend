@@ -1,7 +1,7 @@
-import {child, Database, DatabaseReference, get, ref} from "@firebase/database";
+import {child, Database, DatabaseReference, get, ref, set} from "@firebase/database";
 import {FirebaseConnectionProvider} from "../../../infra/firebase/FirebaseConnectionProvider";
 import {REPORT_PATH} from "../../utils/Consts";
-import {mapReportData} from "../model/ReportMapper";
+import {mapReportData, mapToReportData} from "../model/ReportMapper";
 
 export class ReportRepositoryImpl implements IReportRepository {
     private readonly database: Database;
@@ -11,6 +11,30 @@ export class ReportRepositoryImpl implements IReportRepository {
         this.database = FirebaseConnectionProvider.getDb()
         this.dbRef = ref(this.database)
     }
+
+    async changeStatusReport(reportId: string): Promise<boolean> {
+      try {
+          // Use getByReportId to find the report
+          const report = await this.getByReportId(reportId);
+  
+          if (report) {
+              // Update the "atendido" attribute
+              report.attended = true;
+  
+              // Update the report in the database
+              const reportRef = ref(this.database, REPORT_PATH + '/' + report.userId + '/' + report.id);
+              await set(reportRef, mapToReportData(report));
+  
+              return true;
+          } else {
+              console.log(`Report with ID ${reportId} not found.`);
+              return false;
+          }
+      } catch (error) {
+          console.error('Error updating report status:', error);
+          return false;
+      }
+  }
 
     async getAll(): Promise<ReportF[]> {
         return get(child(this.dbRef, REPORT_PATH))
